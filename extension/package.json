@@ -1,0 +1,76 @@
+{
+  "name": "demo",
+  "displayName": "Demo Extension",
+  "publisher": "unknown",
+  "description": "Demo VSCode Extension",
+  "version": "0.0.1",
+  "repository": "https://github.com/glennsarti/blog-wasm-vscode.git",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:demo",
+    "workspaceContains:**/*.demo"
+  ],
+  "main": "./out/node/extension.js",
+  "browser": "./out/browser/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "demo",
+        "aliases": [
+          "Demonstration"
+        ],
+        "extensions": [
+          ".demo"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:package": "vsce package",
+    "vscode:prepublishxxxxx": "npm run package",
+    "lint": "eslint src --ext ts",
+    "pretest": "npm run compile && npm run lint",
+    "compile": "npm run compile:lsp && webpack --config webpack.node.config.js --config webpack.web.config.js",
+    "compile:lsp": "node ext/compile-lsp.js",
+    "compile:node": "webpack --config webpack.node.config.js",
+    "compile:web": "webpack --config webpack.web.config.js",
+    "watch": "npm run compile:lsp && webpack --watch --config webpack.node.config.js --config webpack.web.config.js",
+    "watch:node": "webpack --watch --config webpack.node.config.js",
+    "watch:web": "webpack --watch --config webpack.web.config.js",
+    "package": "npm run compile:lsp && webpack --mode production --devtool hidden-source-map --config webpack.web.config.js --config webpack.node.config.js",
+    "test": "node ./out/test/runTest.js",
+    "test-web": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. --extensionTestsPath=dist/web/test/suite/index.js",
+    "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.63.0",
+    "@types/webpack-env": "^1.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "@vscode/test-electron": "^1.6.2",
+    "@vscode/test-web": "^0.0.22",
+    "eslint": "^8.1.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.3",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.4",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "vsce": "^2.6.7"
+  },
+  "dependencies": {
+    "@vscode/extension-telemetry": "^0.4.9",
+    "vscode-languageclient": "^7.0.0"
+  }
+}

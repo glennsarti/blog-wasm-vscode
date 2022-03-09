@@ -1,0 +1,13 @@
+{
+  "name": "minilsp",
+  "scripts": {
+    "serve": "nodemon serve.js --watch .",
+    "shell": "cmd /k"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "compression": "^1.7.4"
+  }
+}
